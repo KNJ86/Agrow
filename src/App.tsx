@@ -24,14 +24,14 @@ import {
 
 // --- Components ---
 
-const Navbar = () => {
+const Navbar = ({ lang, setLang }: { lang: 'KOR' | 'ENG', setLang: (l: 'KOR' | 'ENG') => void }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Service', href: '#service' },
-    { name: 'Global', href: '#global' },
-    { name: 'News', href: '#news' },
+    { name: lang === 'KOR' ? 'About' : 'About', href: '#about' },
+    { name: lang === 'KOR' ? 'Service' : 'Service', href: '#service' },
+    { name: lang === 'KOR' ? 'Global' : 'Global', href: '#global' },
+    { name: lang === 'KOR' ? 'News' : 'News', href: '#news' },
   ];
 
   return (
@@ -49,10 +49,23 @@ const Navbar = () => {
       </div>
 
       <div className="flex items-center gap-3">
-        <button className="w-11 h-11 flex items-center justify-center text-white border border-white/30 rounded-full hover:bg-white/10 transition-colors backdrop-blur-sm">
-          <Search className="w-5 h-5" />
-        </button>
-        <a href="#contact" className="hidden md:block px-6 py-2.5 text-base text-[#0f251a] bg-white rounded-full font-medium transition-colors">Contact Us</a>
+        <div className="flex items-center bg-white/10 backdrop-blur-sm border border-white/30 rounded-full p-1">
+          <button 
+            onClick={() => setLang('KOR')}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${lang === 'KOR' ? 'bg-white text-[#0f251a]' : 'text-white/60 hover:text-white'}`}
+          >
+            KOR
+          </button>
+          <button 
+            onClick={() => setLang('ENG')}
+            className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${lang === 'ENG' ? 'bg-white text-[#0f251a]' : 'text-white/60 hover:text-white'}`}
+          >
+            ENG
+          </button>
+        </div>
+        <a href="#contact" className="hidden md:block px-6 py-2.5 text-base text-[#0f251a] bg-white rounded-full font-medium transition-colors">
+          {lang === 'KOR' ? 'Contact Us' : 'Contact Us'}
+        </a>
         <button 
           className="md:hidden w-11 h-11 flex items-center justify-center text-white border border-white/30 rounded-full backdrop-blur-sm"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -84,7 +97,7 @@ const Navbar = () => {
   );
 };
 
-const Hero = () => {
+const Hero = ({ lang, setLang }: { lang: 'KOR' | 'ENG', setLang: (l: 'KOR' | 'ENG') => void }) => {
   return (
     <section className="p-4 md:p-6 lg:p-8">
       <motion.div 
@@ -102,7 +115,7 @@ const Hero = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80 z-0"></div>
 
-        <Navbar />
+        <Navbar lang={lang} setLang={setLang} />
 
         {/* Hero Content */}
         <div className="relative z-10 flex-1 flex flex-col items-center justify-center text-center px-4 w-full pt-12 pb-24">
@@ -110,9 +123,11 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="px-6 py-2 border border-white/30 rounded-full backdrop-blur-md text-white/90 text-sm font-medium mb-6"
+            className="px-10 py-4 border border-white/30 rounded-full backdrop-blur-md text-white/90 text-base md:text-lg font-medium mb-8"
           >
-            기술로 지속가능한 농업을 설계하는 솔루션기업, AGROW
+            {lang === 'KOR' 
+              ? "기술로 지속가능한 농업을 설계하는 솔루션기업, AGROW" 
+              : "AGROW, a solution company designing sustainable agriculture through technology"}
           </motion.div>
           <motion.h1 
             initial={{ opacity: 0, y: 40 }}
@@ -128,7 +143,9 @@ const Hero = () => {
             transition={{ delay: 0.8 }}
             className="text-lg md:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed font-light"
           >
-            농업의 본질을 기술로 재설계하여 지속 가능한 식량 시스템을 구축합니다.
+            {lang === 'KOR'
+              ? "농업의 본질을 기술로 재설계하여 지속 가능한 식량 시스템을 구축합니다."
+              : "Redesigning the essence of agriculture with technology to build a sustainable food system."}
           </motion.p>
         </div>
 
@@ -137,20 +154,25 @@ const Hero = () => {
           <div className="flex flex-col sm:flex-row gap-8 md:gap-12 text-left">
             <div>
               <p className="text-white/50 text-xs uppercase tracking-widest mb-1">🌱 Mission</p>
-              <p className="text-white text-base md:text-lg font-medium max-w-xs">기술과 데이터로 농업의 본질을 재설계하여 지속가능한 식량 시스템 구축</p>
+              <p className="text-white text-base md:text-lg font-medium max-w-xs">
+                {lang === 'KOR'
+                  ? "기술과 데이터로 농업의 본질을 재설계하여 지속가능한 식량 시스템 구축"
+                  : "Building a sustainable food system by redesigning the essence of agriculture with technology and data"}
+              </p>
             </div>
             <div>
               <p className="text-white/50 text-xs uppercase tracking-widest mb-1">🌍 Core Value</p>
-              <p className="text-white text-base md:text-lg font-medium max-w-xs">농업에 대한 이해와 Ag-Tech 도입으로, 지속가능한 농업 성장을 실현</p>
+              <p className="text-white text-base md:text-lg font-medium max-w-xs">
+                {lang === 'KOR'
+                  ? "농업에 대한 이해와 Ag-Tech 도입으로, 지속가능한 농업 성장을 실현"
+                  : "Realizing sustainable agricultural growth through understanding agriculture and adopting Ag-Tech"}
+              </p>
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <button className="w-14 h-14 rounded-full border border-white/30 flex items-center justify-center text-white backdrop-blur-sm hover:bg-white/10 transition-colors">
               <ArrowDown className="w-6 h-6" />
-            </button>
-            <button className="bg-white text-[#0f251a] px-10 py-5 rounded-full font-bold text-lg hover:bg-neutral-100 transition-colors whitespace-nowrap uppercase tracking-tight">
-              Explore Solutions
             </button>
           </div>
         </div>
@@ -159,7 +181,7 @@ const Hero = () => {
   );
 };
 
-const About = () => {
+const About = ({ lang }: { lang: 'KOR' | 'ENG' }) => {
   return (
     <section id="about" className="py-24 px-6 md:px-12 max-w-[100rem] mx-auto">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-start">
@@ -174,27 +196,57 @@ const About = () => {
           </h2>
           <div className="space-y-6 text-xl text-neutral-600 leading-relaxed max-w-xl mb-12">
             <p className="font-bold text-[#0f251a]">
-              "우리는 기후변화라는 가장 근본적인 위기에 맞서 <br />농업의 본질을 기술로 재설계합니다.″
+              {lang === 'KOR'
+                ? "\"우리는 기후변화라는 가장 근본적인 위기에 맞서 농업의 본질을 기술로 재설계합니다.″"
+                : "\"We redesign the essence of agriculture with technology against the most fundamental crisis of climate change.\""}
             </p>
             <p>
-              Agrow는 Agriculture와 Grow의 결합입니다. <br />
-              그러나 우리가 키우는 것은 단지 식물이 아닙니다. <br />
-              우리는 기후 회복력 있는 식량 시스템, <br />
-              농민이 함께 살아가는 지속 가능한 방식, <br />
-              그리고 더 나은 지구를 위한 기술 기반의 성장을 키웁니다.
+              {lang === 'KOR' ? (
+                <>
+                  Agrow는 Agriculture와 Grow의 결합입니다. <br />
+                  그러나 우리가 키우는 것은 단지 식물이 아닙니다. <br />
+                  우리는 기후 회복력 있는 식량 시스템, <br />
+                  농민이 함께 살아가는 지속 가능한 방식, <br />
+                  그리고 더 나은 지구를 위한 기술 기반의 성장을 키웁니다.
+                </>
+              ) : (
+                <>
+                  Agrow is a combination of Agriculture and Grow. <br />
+                  But what we grow is not just plants. <br />
+                  We grow climate-resilient food systems, <br />
+                  sustainable ways for farmers to live together, <br />
+                  and technology-based growth for a better planet.
+                </>
+              )}
             </p>
             <p>
-              우리는 불확실한 환경을 분석하고, <br />
-              그 안에서 지속 가능한 기회를 설계합니다. <br />
-              지속 가능한 내일을 위해 오늘의 농업을 다시 그립니다.
+              {lang === 'KOR' ? (
+                <>
+                  우리는 불확실한 환경을 분석하고, <br />
+                  그 안에서 지속 가능한 기회를 설계합니다. <br />
+                  지속 가능한 내일을 위해 오늘의 농업을 다시 그립니다.
+                </>
+              ) : (
+                <>
+                  We analyze uncertain environments and <br />
+                  design sustainable opportunities within them. <br />
+                  We redraw today's agriculture for a sustainable tomorrow.
+                </>
+              )}
             </p>
             <p className="text-right font-bold text-[#0f251a]">Grow what matters. Agrow</p>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {[
-              { title: '현장 중심', desc: '농업에 대한 이해와 현장경험' },
-              { title: '데이터 기반', desc: 'Ag-Tech 기반 의사결정 시스템' }
+              { 
+                title: lang === 'KOR' ? '현장 중심' : 'Field-centric', 
+                desc: lang === 'KOR' ? '농업에 대한 이해와 현장경험' : 'Understanding of agriculture and field experience' 
+              },
+              { 
+                title: lang === 'KOR' ? '데이터 기반' : 'Data-driven', 
+                desc: lang === 'KOR' ? 'Ag-Tech 기반 의사결정 시스템' : 'Ag-Tech based decision-making system' 
+              }
             ].map((item, i) => (
               <div key={i} className="p-6 bg-white rounded-3xl border border-neutral-100 shadow-sm">
                 <h4 className="font-bold text-lg mb-2">{item.title}</h4>
@@ -228,24 +280,30 @@ const About = () => {
   );
 };
 
-const Service = () => {
+const Service = ({ lang }: { lang: 'KOR' | 'ENG' }) => {
   const services = [
     {
       title: "Value Chain Optimization",
-      desc: "종자부터 유통까지 전체 밸류체인을 개선하여 최적의 효율을 달성합니다.",
-      tags: ["종자/육묘", "재배관리", "수확/가공", "유통/판매"],
+      desc: lang === 'KOR' 
+        ? "종자부터 유통까지 전체 밸류체인을 개선하여 최적의 효율을 달성합니다."
+        : "Improving the entire value chain from seeds to distribution to achieve optimal efficiency.",
+      tags: lang === 'KOR' ? ["종자/육묘", "재배관리", "수확/가공", "유통/판매"] : ["Seeds/Seedlings", "Cultivation", "Harvest/Processing", "Distribution"],
       image: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=1000&auto=format&fit=crop"
     },
     {
-      title: "현장분석 기반 적정기술 도입",
-      desc: "현장 분석을 통해 가장 적절한 Ag-Tech를 접목시켜 농업의 효율을 증대시킵니다.",
-      tags: ["농작업 대행", "데이터 의사결정", "현장 관리"],
+      title: lang === 'KOR' ? "현장분석 기반 적정기술 도입" : "Field Analysis-based Appropriate Tech Adoption",
+      desc: lang === 'KOR'
+        ? "현장 분석을 통해 가장 적절한 Ag-Tech를 접목시켜 농업의 효율을 증대시킵니다."
+        : "Increases agricultural efficiency by integrating the most appropriate Ag-Tech through field analysis.",
+      tags: lang === 'KOR' ? ["농작업 대행", "데이터 의사결정", "현장 관리"] : ["Farm Task Agency", "Data Decision", "Field Management"],
       image: "https://images.unsplash.com/photo-1586771107445-d3ca888129ff?q=80&w=1000&auto=format&fit=crop"
     },
     {
       title: "Smart Farming",
-      desc: "IoT와 데이터를 결합한 첨단 스마트팜 구축 솔루션을 제공합니다.",
-      tags: ["스마트팜 구축", "IoT 데이터", "정밀 농업"],
+      desc: lang === 'KOR'
+        ? "IoT와 데이터를 결합한 첨단 스마트팜 구축 솔루션을 제공합니다."
+        : "Provides advanced smart farm construction solutions combining IoT and data.",
+      tags: lang === 'KOR' ? ["스마트팜 구축", "IoT 데이터", "정밀 농업"] : ["Smart Farm Build", "IoT Data", "Precision Ag"],
       image: "https://images.unsplash.com/photo-1530836361253-ee6121881b94?q=80&w=1000&auto=format&fit=crop"
     }
   ];
@@ -259,7 +317,9 @@ const Service = () => {
             <h2 className="text-6xl md:text-8xl font-bold tracking-tighter leading-none">Total Solution</h2>
           </div>
           <p className="text-lg text-white/70 max-w-md leading-relaxed">
-            Agrow는 문제 해결 방식 중심의 구조로 설계된 통합 농업 솔루션을 통해 가치를 창출합니다.
+            {lang === 'KOR'
+              ? "Agrow는 문제 해결 방식 중심의 구조로 설계된 통합 농업 솔루션을 통해 가치를 창출합니다."
+              : "Agrow creates value through integrated agricultural solutions designed with a problem-solving approach."}
           </p>
         </div>
 
@@ -301,7 +361,7 @@ const Service = () => {
   );
 };
 
-const Global = () => {
+const Global = ({ lang }: { lang: 'KOR' | 'ENG' }) => {
   return (
     <section id="global" className="py-24 bg-[#0f251a] text-white overflow-hidden">
       <div className="px-6 md:px-12 max-w-[100rem] mx-auto">
@@ -314,22 +374,23 @@ const Global = () => {
             <p className="text-white/50 text-sm font-bold uppercase tracking-widest mb-4">Global Presence</p>
             <h2 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8 leading-none">Indonesia <br />& Beyond</h2>
             <p className="text-xl text-white/70 leading-relaxed mb-12 max-w-xl">
-              Agrow는 인도네시아를 시작으로 글로벌 농업 시장에 진출하고 있습니다. 
-              현지 기후와 토양에 최적화된 솔루션을 통해 글로벌 식량 안보에 기여합니다.
+              {lang === 'KOR'
+                ? "Agrow는 인도네시아를 시작으로 글로벌 농업 시장에 진출하고 있습니다. 현지 기후와 토양에 최적화된 솔루션을 통해 글로벌 식량 안보에 기여합니다."
+                : "Starting with Indonesia, Agrow is expanding into the global agricultural market. We contribute to global food security through solutions optimized for local climate and soil."}
             </p>
             <div className="flex flex-col gap-6">
               <div className="flex items-center gap-6 p-6 bg-white/5 rounded-3xl border border-white/10">
                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center font-bold">01</div>
                 <div>
-                  <h4 className="font-bold text-lg">인도네시아 거점 구축</h4>
-                  <p className="text-sm text-white/50">동남아시아 시장 진출을 위한 전략적 요충지</p>
+                  <h4 className="font-bold text-lg">{lang === 'KOR' ? '인도네시아 거점 구축' : 'Establishing Indonesia Base'}</h4>
+                  <p className="text-sm text-white/50">{lang === 'KOR' ? '동남아시아 시장 진출을 위한 전략적 요충지' : 'Strategic point for Southeast Asian market entry'}</p>
                 </div>
               </div>
               <div className="flex items-center gap-6 p-6 bg-white/5 rounded-3xl border border-white/10">
                 <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center font-bold">02</div>
                 <div>
-                  <h4 className="font-bold text-lg">글로벌 확장 로드맵</h4>
-                  <p className="text-sm text-white/50">데이터 기반의 표준화된 솔루션으로 전 세계 확산</p>
+                  <h4 className="font-bold text-lg">{lang === 'KOR' ? '글로벌 확장 로드맵' : 'Global Expansion Roadmap'}</h4>
+                  <p className="text-sm text-white/50">{lang === 'KOR' ? '데이터 기반의 표준화된 솔루션으로 전 세계 확산' : 'Spreading worldwide with data-based standardized solutions'}</p>
                 </div>
               </div>
             </div>
@@ -355,22 +416,31 @@ const Global = () => {
   );
 };
 
-const News = () => {
+const News = ({ lang }: { lang: 'KOR' | 'ENG' }) => {
   const news = [
+    {
+      date: "2024.11.21",
+      title: "에이그로우, 인도네시아 스마트팜 시장 공략 가속화",
+      category: "Global",
+      link: "https://www.kado.net/news/articleView.html?idxno=2038424"
+    },
+    {
+      date: "2024.11.15",
+      title: "에이그로우, '2024 스마트농업 박람회' 참가",
+      category: "Event",
+      link: "https://www.gukjenews.com/news/articleView.html?idxno=3527010"
+    },
     {
       date: "2024.03.15",
       title: "Agrow, 인도네시아 스마트팜 시범 사업 착수",
-      category: "Global"
+      category: "Global",
+      link: "#"
     },
     {
       date: "2024.02.28",
       title: "데이터 기반 농작업 대행 솔루션 FaaS 2.0 출시",
-      category: "Tech"
-    },
-    {
-      date: "2024.01.10",
-      title: "시리즈 A 투자 유치 성공, 글로벌 확장 가속화",
-      category: "Business"
+      category: "Tech",
+      link: "#"
     }
   ];
 
@@ -382,7 +452,7 @@ const News = () => {
           <h2 className="text-6xl md:text-8xl font-bold tracking-tighter leading-none">News</h2>
         </div>
         <button className="hidden md:flex items-center gap-2 px-8 py-4 border border-neutral-200 rounded-full font-medium hover:bg-neutral-50 transition-all">
-          View All <ArrowRight className="w-4 h-4" />
+          {lang === 'KOR' ? 'View All' : 'View All'} <ArrowRight className="w-4 h-4" />
         </button>
       </div>
 
@@ -393,6 +463,7 @@ const News = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            onClick={() => item.link !== '#' && window.open(item.link, '_blank')}
             className="py-10 flex flex-col md:flex-row justify-between items-start md:items-center group cursor-pointer"
           >
             <div className="flex items-center gap-8 mb-4 md:mb-0">
@@ -410,15 +481,18 @@ const News = () => {
   );
 };
 
-const Contact = () => {
+const Contact = ({ lang }: { lang: 'KOR' | 'ENG' }) => {
   return (
     <section id="contact" className="py-24 px-6 md:px-12 max-w-[100rem] mx-auto">
       <div className="bg-[#f0f4ef] rounded-[4rem] p-12 md:p-24 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
         <div>
-          <h2 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8 leading-none">Let's Grow <br />Together</h2>
+          <h2 className="text-6xl md:text-8xl font-bold tracking-tighter mb-8 leading-none">
+            {lang === 'KOR' ? <>Let's Grow <br />Together</> : <>Let's Grow <br />Together</>}
+          </h2>
           <p className="text-xl text-neutral-600 leading-relaxed mb-12 max-w-md">
-            Agrow와 함께 농업의 미래를 설계할 파트너를 찾습니다. 
-            솔루션 도입 문의 및 협업 제안을 기다립니다.
+            {lang === 'KOR'
+              ? "Agrow와 함께 농업의 미래를 설계할 파트너를 찾습니다. 솔루션 도입 문의 및 협업 제안을 기다립니다."
+              : "Looking for partners to design the future of agriculture with Agrow. We look forward to solution inquiries and collaboration proposals."}
           </p>
           <div className="space-y-6">
             <div className="flex items-center gap-4">
@@ -440,25 +514,27 @@ const Contact = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label className="text-xs font-bold uppercase tracking-widest text-neutral-400">Name</label>
-              <input type="text" placeholder="Your Name" className="w-full px-6 py-4 bg-neutral-50 rounded-2xl border-none focus:ring-2 focus:ring-[#0f251a] transition-all" />
+              <input type="text" placeholder={lang === 'KOR' ? "이름" : "Your Name"} className="w-full px-6 py-4 bg-neutral-50 rounded-2xl border-none focus:ring-2 focus:ring-[#0f251a] transition-all" />
             </div>
             <div className="space-y-2">
               <label className="text-xs font-bold uppercase tracking-widest text-neutral-400">Email</label>
-              <input type="email" placeholder="Your Email" className="w-full px-6 py-4 bg-neutral-50 rounded-2xl border-none focus:ring-2 focus:ring-[#0f251a] transition-all" />
+              <input type="email" placeholder={lang === 'KOR' ? "이메일" : "Your Email"} className="w-full px-6 py-4 bg-neutral-50 rounded-2xl border-none focus:ring-2 focus:ring-[#0f251a] transition-all" />
             </div>
           </div>
           <div className="space-y-2">
             <label className="text-xs font-bold uppercase tracking-widest text-neutral-400">Message</label>
-            <textarea rows={4} placeholder="How can we help?" className="w-full px-6 py-4 bg-neutral-50 rounded-2xl border-none focus:ring-2 focus:ring-[#0f251a] transition-all resize-none"></textarea>
+            <textarea rows={4} placeholder={lang === 'KOR' ? "문의 내용을 입력해주세요" : "How can we help?"} className="w-full px-6 py-4 bg-neutral-50 rounded-2xl border-none focus:ring-2 focus:ring-[#0f251a] transition-all resize-none"></textarea>
           </div>
-          <button className="w-full py-5 bg-[#0f251a] text-white rounded-2xl font-bold text-lg hover:bg-[#1a3a2f] transition-all">Send Message</button>
+          <button className="w-full py-5 bg-[#0f251a] text-white rounded-2xl font-bold text-lg hover:bg-[#1a3a2f] transition-all">
+            {lang === 'KOR' ? '메시지 보내기' : 'Send Message'}
+          </button>
         </form>
       </div>
     </section>
   );
 };
 
-const Footer = () => {
+const Footer = ({ lang }: { lang: 'KOR' | 'ENG' }) => {
   return (
     <footer className="mt-24 p-4 md:p-6 lg:p-8 pb-0">
       <div className="relative rounded-t-[3rem] overflow-hidden bg-[#0f251a] pt-24 pb-12 px-6 md:px-12">
@@ -513,10 +589,18 @@ const Footer = () => {
           
           <div className="pt-12 border-t border-white/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div className="space-y-2">
-              <p className="text-white font-bold">주식회사 에이그로우</p>
-              <p className="text-white/50 text-sm">사업자 등록번호 : 292-86-03541 | 대표 : 박영민</p>
-              <p className="text-white/50 text-sm">강원특별자치도 춘천시 퇴계농공로 96, 비동</p>
-              <p className="text-white/30 text-xs pt-4">© 2024 Agrow Inc. All Rights Reserved.</p>
+              <p className="text-white font-bold">{lang === 'KOR' ? '주식회사 에이그로우' : 'Agrow Inc.'}</p>
+              <p className="text-white/50 text-sm">
+                {lang === 'KOR' 
+                  ? '사업자 등록번호 : 292-86-03541 | 대표 : 박영민' 
+                  : 'Business Registration: 292-86-03541 | CEO: Youngmin Park'}
+              </p>
+              <p className="text-white/50 text-sm">
+                {lang === 'KOR'
+                  ? '강원특별자치도 춘천시 퇴계농공로 96, 비동'
+                  : 'B-dong, 96, Toegyegong-ro, Chuncheon-si, Gangwon-do, Korea'}
+              </p>
+              <p className="text-white/30 text-xs pt-4">© 2025 Agrow Inc. All Rights Reserved.</p>
             </div>
             <div className="flex gap-8 text-white/30 text-sm">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
@@ -532,15 +616,17 @@ const Footer = () => {
 // --- Main App ---
 
 export default function App() {
+  const [lang, setLang] = useState<'KOR' | 'ENG'>('KOR');
+
   return (
     <div className="font-sans antialiased text-[#0f251a] bg-[#e6ebe5] selection:bg-[#0f251a] selection:text-white break-keep scroll-smooth">
-      <Hero />
-      <About />
-      <Service />
-      <Global />
-      <News />
-      <Contact />
-      <Footer />
+      <Hero lang={lang} setLang={setLang} />
+      <About lang={lang} />
+      <Service lang={lang} />
+      <Global lang={lang} />
+      <News lang={lang} />
+      <Contact lang={lang} />
+      <Footer lang={lang} />
     </div>
   );
 }
