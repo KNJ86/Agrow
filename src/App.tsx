@@ -37,7 +37,7 @@ const Navbar = ({ lang, setLang }: { lang: 'KOR' | 'ENG' | 'IDN', setLang: (l: '
   return (
     <nav className="relative z-20 w-full px-6 py-8 md:px-12 flex justify-between items-center">
       <div className="flex items-center gap-2 text-white">
-        <img src="https://raw.githubusercontent.com/KNJ86/Agrow/main/src/Agrow_BI.png" alt="Agrow Logo" className="h-10 md:h-12 object-contain" referrerPolicy="no-referrer" />
+        <img src="https://previews.dropbox.com/p/thumb/AC95FWeFjxBI0IuxWYm-_HTmO5qGJ-0_VSKkif-q4TKnCsxV5KXp1y_Ox38mrb3b5vwYY85ZTKka0Wa_eEwq8VYh3IOxVI0ZSSyvghdLHPgoHtxS56Qhwi3EYeEoYwFmiZLY6SPQcY1MSrlK3Ka57WoVsuje7YRn60OzKMBjzg-s30zxw-3wuahIeClINRojfyEhErycLk5GA2rD6bjbUeucG9_YPVp7xA6InUmetSKf1sZsqn6k2ZMJ0x97Ugizi0e1FJOEL_KIKrE_xLaBqb-fvzh5RVgviUlxnNqXshYxCqBWc-hTAXYkNRp0CRT5-davcn_ABOrGYcywIhC-gvw7/p.png?is_prewarmed=true" alt="Agrow Logo" className="h-10 md:h-12 object-contain" referrerPolicy="no-referrer" />
       </div>
       
       <div className="hidden md:flex items-center gap-3">
