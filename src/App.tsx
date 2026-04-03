@@ -293,7 +293,7 @@ const About = ({ lang }: { lang: 'KOR' | 'ENG' | 'IDN' }) => {
           className="relative aspect-square rounded-[4rem] overflow-hidden"
         >
           <img 
-            src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?q=80&w=1000&auto=format&fit=crop" 
+            src="https://raw.githubusercontent.com/KNJ86/agrow/refs/heads/img/fields.jpg" 
             className="absolute inset-0 w-full h-full object-cover"
             alt="Agtech Innovation"
             referrerPolicy="no-referrer"
@@ -523,7 +523,7 @@ const Global = ({ lang }: { lang: 'KOR' | 'ENG' | 'IDN' }) => {
             className="relative aspect-video lg:aspect-square rounded-[4rem] overflow-hidden"
           >
             <img 
-              src="https://raw.githubusercontent.com/KNJ86/agrow/refs/heads/img/Indoensia.jpg&auto=format&fit=crop" 
+              src="https://raw.githubusercontent.com/KNJ86/agrow/refs/heads/img/Indoensia.jpg" 
               className="absolute inset-0 w-full h-full object-cover"
               alt="Global Agriculture"
               referrerPolicy="no-referrer"
