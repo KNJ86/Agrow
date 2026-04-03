@@ -114,7 +114,7 @@ const Hero = ({ lang, setLang }: { lang: 'KOR' | 'ENG' | 'IDN', setLang: (l: 'KO
       >
         {/* Background Video/Image with Overlay */}
         <img 
-          src="https://raw.githubusercontent.com/KNJ86/agrow/refs/heads/img/fields.jpg&auto=format&fit=crop" 
+          src="https://raw.githubusercontent.com/KNJ86/agrow/refs/heads/img/fields.jpg" 
           alt="Smart Farming" 
           className="absolute inset-0 w-full h-full object-cover z-0 brightness-50"
           referrerPolicy="no-referrer"
